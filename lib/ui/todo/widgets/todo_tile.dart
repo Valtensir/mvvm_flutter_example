@@ -17,7 +17,7 @@ class _TodoTileState extends State<TodoTile> {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Text("${widget.todo.id}"),
+      leading: Text(widget.todo.id),
       title: Text(widget.todo.name),
       trailing: IconButton(
         onPressed: () => widget.viewModel.deleteTodo.execute(widget.todo),

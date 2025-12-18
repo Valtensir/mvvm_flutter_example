@@ -1,16 +1,56 @@
 {
   "todos": [
     {
-      "id": "874c",
-      "name": "Another todo"
-    },
-    {
-      "id": "2639",
-      "name": "Another todo"
-    },
-    {
       "id": "c2d5",
       "name": "New Todo"
+    },
+    {
+      "id": "f285",
+      "name": "New Todo"
+    },
+    {
+      "id": "ba36",
+      "name": "New Todo"
+    },
+    {
+      "id": "3391",
+      "name": "Todo to be updated",
+      "runtimeType": "update"
+    },
+    {
+      "id": "f693",
+      "name": "Todo to be updated + 1",
+      "runtimeType": "update"
+    },
+    {
+      "id": "29c3",
+      "name": "Todo to be updated + 1",
+      "runtimeType": "update"
+    },
+    {
+      "id": "2b85",
+      "name": "Todo to be updated + 1",
+      "runtimeType": "update"
+    },
+    {
+      "id": "08e0",
+      "name": "Todo to be updated + 2",
+      "runtimeType": "update"
+    },
+    {
+      "id": "e8ae",
+      "name": "Todo to be updated + 2",
+      "runtimeType": "update"
+    },
+    {
+      "id": "caff",
+      "name": "Todo to be updated + 2",
+      "runtimeType": "update"
+    },
+    {
+      "id": "d7f6",
+      "name": "todo teste",
+      "runtimeType": "create"
     }
   ]
 }
