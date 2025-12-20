@@ -8,7 +8,7 @@ void main() {
   late ApiClient apiClient;
 
   setUp(() {
-    apiClient = ApiClient();
+    apiClient = ApiClient(host: '192.168.1.12');
   });
 
   group("Test [ApiClient]", () {
@@ -50,5 +50,18 @@ void main() {
       ),
     );
     expect(result.asOk().value, isA<Todo>());
+  });
+
+  test("get Todo by id returns a Result Ok", () async {
+    const CreateTodoApiModel todoToCreate = CreateTodoApiModel(
+      name: "New test todo",
+    );
+    final createdTodoResult = await apiClient.createTodo(todoToCreate);
+
+    final result = await apiClient.getTodoById(
+      createdTodoResult.asOk().value.id,
+    );
+    expect(result.asOk().value, isA<Todo>());
+    expect(result.asOk().value.id, createdTodoResult.asOk().value.id);
   });
 }

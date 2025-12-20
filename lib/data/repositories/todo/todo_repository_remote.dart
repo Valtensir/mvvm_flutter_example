@@ -60,4 +60,20 @@ class TodoRepositoryRemote implements TodoRepository {
       return Result.error(e);
     }
   }
+
+  @override
+  Future<Result<Todo>> getTodoById(String id) async {
+    try {
+      final result = await _apiClient.getTodoById(id);
+
+      switch (result) {
+        case Ok<Todo>():
+          return Result.ok(result.value);
+        default:
+          return result;
+      }
+    } on Exception catch (e) {
+      return Result.error(e);
+    }
+  }
 }
