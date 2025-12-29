@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mvvm_example/data/repositories/todo/todo_repository_dev.dart';
+import 'package:mvvm_example/domain/use_cases/todo_update_use_case.dart';
 import 'package:mvvm_example/ui/todo/viewmodels/todo_viewmodel.dart';
 import 'package:mvvm_example/ui/todo/widgets/todo_screen.dart';
 
@@ -12,6 +13,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final todoRepository = TodoRepositoryDev();
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -20,7 +22,8 @@ class MyApp extends StatelessWidget {
       ),
       home: TodoScreen(
         viewModel: TodoViewmodel(
-          repository: TodoRepositoryDev(),
+          todoUpdateUseCase: TodoUpdateUseCase(todoRepository: todoRepository),
+          repository: todoRepository,
         ),
       ),
     );

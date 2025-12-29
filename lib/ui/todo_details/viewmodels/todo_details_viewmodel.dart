@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:mvvm_example/data/repositories/todo/todo_repository.dart';
+import 'package:mvvm_example/domain/use_cases/todo_update_use_case.dart';
 import 'package:mvvm_example/utils/commands/commands.dart';
 import 'package:mvvm_example/utils/result/result.dart';
 
@@ -7,13 +8,19 @@ import '../../../domain/models/todo.dart';
 
 class TodoDetailsViewmodel extends ChangeNotifier {
   final TodoRepository _repository;
+  final TodoUpdateUseCase _todoUpdateUseCase;
 
-  TodoDetailsViewmodel({required TodoRepository todoRepository})
-    : _repository = todoRepository {
-      load = Command1(_load);
-    }
+  TodoDetailsViewmodel({
+    required TodoRepository todoRepository,
+    required TodoUpdateUseCase todoUpdateUseCase,
+  }) : _repository = todoRepository,
+       _todoUpdateUseCase = todoUpdateUseCase {
+    load = Command1(_load);
+    updateTodo = Command1(_todoUpdateUseCase.updateTodo);
+  }
 
   late final Command1<Todo, String> load;
+  late final Command1<Todo, Todo> updateTodo;
 
   late Todo _todo;
   Todo get todo => _todo;

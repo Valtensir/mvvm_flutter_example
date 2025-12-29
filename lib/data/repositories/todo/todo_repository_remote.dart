@@ -12,10 +12,14 @@ class TodoRepositoryRemote implements TodoRepository {
   TodoRepositoryRemote({required ApiClient apiClient}) : _apiClient = apiClient;
 
   @override
-  Future<Result<Todo>> add(String name) async {
+  Future<Result<Todo>> add({
+    required String name,
+    required String description,
+    required bool done,
+  }) async {
     try {
       final result = await _apiClient.createTodo(
-        CreateTodoApiModel(name: name),
+        CreateTodoApiModel(name: name, description: description, done: done),
       );
 
       switch (result) {
@@ -65,6 +69,29 @@ class TodoRepositoryRemote implements TodoRepository {
   Future<Result<Todo>> getTodoById(String id) async {
     try {
       final result = await _apiClient.getTodoById(id);
+
+      switch (result) {
+        case Ok<Todo>():
+          return Result.ok(result.value);
+        default:
+          return result;
+      }
+    } on Exception catch (e) {
+      return Result.error(e);
+    }
+  }
+
+  @override
+  Future<Result<Todo>> update(Todo todo) async {
+    try {
+      final result = await _apiClient.udpateTodo(
+        UpdateTodoApiModel(
+          id: todo.id,
+          name: todo.name,
+          description: todo.description,
+          done: todo.done,
+        ),
+      );
 
       switch (result) {
         case Ok<Todo>():

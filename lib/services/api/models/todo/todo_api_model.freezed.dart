@@ -35,20 +35,31 @@ TodoApiModel _$TodoApiModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$TodoApiModel {
   String get name => throw _privateConstructorUsedError;
+  String get description => throw _privateConstructorUsedError;
+  bool get done => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String name) create,
-    required TResult Function(String id, String name) update,
+    required TResult Function(String name, String description, bool done)
+    create,
+    required TResult Function(
+      String id,
+      String name,
+      String description,
+      bool done,
+    )
+    update,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String name)? create,
-    TResult? Function(String id, String name)? update,
+    TResult? Function(String name, String description, bool done)? create,
+    TResult? Function(String id, String name, String description, bool done)?
+    update,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String name)? create,
-    TResult Function(String id, String name)? update,
+    TResult Function(String name, String description, bool done)? create,
+    TResult Function(String id, String name, String description, bool done)?
+    update,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -85,7 +96,7 @@ abstract class $TodoApiModelCopyWith<$Res> {
     $Res Function(TodoApiModel) then,
   ) = _$TodoApiModelCopyWithImpl<$Res, TodoApiModel>;
   @useResult
-  $Res call({String name});
+  $Res call({String name, String description, bool done});
 }
 
 /// @nodoc
@@ -102,13 +113,25 @@ class _$TodoApiModelCopyWithImpl<$Res, $Val extends TodoApiModel>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? name = null}) {
+  $Res call({
+    Object? name = null,
+    Object? description = null,
+    Object? done = null,
+  }) {
     return _then(
       _value.copyWith(
             name: null == name
                 ? _value.name
                 : name // ignore: cast_nullable_to_non_nullable
                       as String,
+            description: null == description
+                ? _value.description
+                : description // ignore: cast_nullable_to_non_nullable
+                      as String,
+            done: null == done
+                ? _value.done
+                : done // ignore: cast_nullable_to_non_nullable
+                      as bool,
           )
           as $Val,
     );
@@ -124,7 +147,7 @@ abstract class _$$CreateTodoApiModelImplCopyWith<$Res>
   ) = __$$CreateTodoApiModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name});
+  $Res call({String name, String description, bool done});
 }
 
 /// @nodoc
@@ -140,13 +163,25 @@ class __$$CreateTodoApiModelImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? name = null}) {
+  $Res call({
+    Object? name = null,
+    Object? description = null,
+    Object? done = null,
+  }) {
     return _then(
       _$CreateTodoApiModelImpl(
         name: null == name
             ? _value.name
             : name // ignore: cast_nullable_to_non_nullable
                   as String,
+        description: null == description
+            ? _value.description
+            : description // ignore: cast_nullable_to_non_nullable
+                  as String,
+        done: null == done
+            ? _value.done
+            : done // ignore: cast_nullable_to_non_nullable
+                  as bool,
       ),
     );
   }
@@ -155,21 +190,29 @@ class __$$CreateTodoApiModelImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$CreateTodoApiModelImpl implements CreateTodoApiModel {
-  const _$CreateTodoApiModelImpl({required this.name, final String? $type})
-    : $type = $type ?? 'create';
+  const _$CreateTodoApiModelImpl({
+    required this.name,
+    required this.description,
+    required this.done,
+    final String? $type,
+  }) : $type = $type ?? 'create';
 
   factory _$CreateTodoApiModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$CreateTodoApiModelImplFromJson(json);
 
   @override
   final String name;
+  @override
+  final String description;
+  @override
+  final bool done;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'TodoApiModel.create(name: $name)';
+    return 'TodoApiModel.create(name: $name, description: $description, done: $done)';
   }
 
   @override
@@ -177,12 +220,15 @@ class _$CreateTodoApiModelImpl implements CreateTodoApiModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CreateTodoApiModelImpl &&
-            (identical(other.name, name) || other.name == name));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.done, done) || other.done == done));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, name);
+  int get hashCode => Object.hash(runtimeType, name, description, done);
 
   /// Create a copy of TodoApiModel
   /// with the given fields replaced by the non-null parameter values.
@@ -198,30 +244,39 @@ class _$CreateTodoApiModelImpl implements CreateTodoApiModel {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String name) create,
-    required TResult Function(String id, String name) update,
+    required TResult Function(String name, String description, bool done)
+    create,
+    required TResult Function(
+      String id,
+      String name,
+      String description,
+      bool done,
+    )
+    update,
   }) {
-    return create(name);
+    return create(name, description, done);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String name)? create,
-    TResult? Function(String id, String name)? update,
+    TResult? Function(String name, String description, bool done)? create,
+    TResult? Function(String id, String name, String description, bool done)?
+    update,
   }) {
-    return create?.call(name);
+    return create?.call(name, description, done);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String name)? create,
-    TResult Function(String id, String name)? update,
+    TResult Function(String name, String description, bool done)? create,
+    TResult Function(String id, String name, String description, bool done)?
+    update,
     required TResult orElse(),
   }) {
     if (create != null) {
-      return create(name);
+      return create(name, description, done);
     }
     return orElse();
   }
@@ -264,14 +319,21 @@ class _$CreateTodoApiModelImpl implements CreateTodoApiModel {
 }
 
 abstract class CreateTodoApiModel implements TodoApiModel {
-  const factory CreateTodoApiModel({required final String name}) =
-      _$CreateTodoApiModelImpl;
+  const factory CreateTodoApiModel({
+    required final String name,
+    required final String description,
+    required final bool done,
+  }) = _$CreateTodoApiModelImpl;
 
   factory CreateTodoApiModel.fromJson(Map<String, dynamic> json) =
       _$CreateTodoApiModelImpl.fromJson;
 
   @override
   String get name;
+  @override
+  String get description;
+  @override
+  bool get done;
 
   /// Create a copy of TodoApiModel
   /// with the given fields replaced by the non-null parameter values.
@@ -290,7 +352,7 @@ abstract class _$$UpdateTodoApiModelImplCopyWith<$Res>
   ) = __$$UpdateTodoApiModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name});
+  $Res call({String id, String name, String description, bool done});
 }
 
 /// @nodoc
@@ -306,7 +368,12 @@ class __$$UpdateTodoApiModelImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? id = null, Object? name = null}) {
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? description = null,
+    Object? done = null,
+  }) {
     return _then(
       _$UpdateTodoApiModelImpl(
         id: null == id
@@ -317,6 +384,14 @@ class __$$UpdateTodoApiModelImplCopyWithImpl<$Res>
             ? _value.name
             : name // ignore: cast_nullable_to_non_nullable
                   as String,
+        description: null == description
+            ? _value.description
+            : description // ignore: cast_nullable_to_non_nullable
+                  as String,
+        done: null == done
+            ? _value.done
+            : done // ignore: cast_nullable_to_non_nullable
+                  as bool,
       ),
     );
   }
@@ -328,6 +403,8 @@ class _$UpdateTodoApiModelImpl implements UpdateTodoApiModel {
   const _$UpdateTodoApiModelImpl({
     required this.id,
     required this.name,
+    required this.description,
+    required this.done,
     final String? $type,
   }) : $type = $type ?? 'update';
 
@@ -338,13 +415,17 @@ class _$UpdateTodoApiModelImpl implements UpdateTodoApiModel {
   final String id;
   @override
   final String name;
+  @override
+  final String description;
+  @override
+  final bool done;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'TodoApiModel.update(id: $id, name: $name)';
+    return 'TodoApiModel.update(id: $id, name: $name, description: $description, done: $done)';
   }
 
   @override
@@ -353,12 +434,15 @@ class _$UpdateTodoApiModelImpl implements UpdateTodoApiModel {
         (other.runtimeType == runtimeType &&
             other is _$UpdateTodoApiModelImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.done, done) || other.done == done));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name);
+  int get hashCode => Object.hash(runtimeType, id, name, description, done);
 
   /// Create a copy of TodoApiModel
   /// with the given fields replaced by the non-null parameter values.
@@ -374,30 +458,39 @@ class _$UpdateTodoApiModelImpl implements UpdateTodoApiModel {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String name) create,
-    required TResult Function(String id, String name) update,
+    required TResult Function(String name, String description, bool done)
+    create,
+    required TResult Function(
+      String id,
+      String name,
+      String description,
+      bool done,
+    )
+    update,
   }) {
-    return update(id, name);
+    return update(id, name, description, done);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String name)? create,
-    TResult? Function(String id, String name)? update,
+    TResult? Function(String name, String description, bool done)? create,
+    TResult? Function(String id, String name, String description, bool done)?
+    update,
   }) {
-    return update?.call(id, name);
+    return update?.call(id, name, description, done);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String name)? create,
-    TResult Function(String id, String name)? update,
+    TResult Function(String name, String description, bool done)? create,
+    TResult Function(String id, String name, String description, bool done)?
+    update,
     required TResult orElse(),
   }) {
     if (update != null) {
-      return update(id, name);
+      return update(id, name, description, done);
     }
     return orElse();
   }
@@ -443,6 +536,8 @@ abstract class UpdateTodoApiModel implements TodoApiModel {
   const factory UpdateTodoApiModel({
     required final String id,
     required final String name,
+    required final String description,
+    required final bool done,
   }) = _$UpdateTodoApiModelImpl;
 
   factory UpdateTodoApiModel.fromJson(Map<String, dynamic> json) =
@@ -451,6 +546,10 @@ abstract class UpdateTodoApiModel implements TodoApiModel {
   String get id;
   @override
   String get name;
+  @override
+  String get description;
+  @override
+  bool get done;
 
   /// Create a copy of TodoApiModel
   /// with the given fields replaced by the non-null parameter values.

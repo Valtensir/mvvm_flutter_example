@@ -21,6 +21,8 @@ void main() {
   test("create Todo returns a Result Ok", () async {
     const CreateTodoApiModel todoToCreate = CreateTodoApiModel(
       name: "New Todo",
+      description: "",
+      done: false
     );
     final result = await apiClient.createTodo(todoToCreate);
     expect(result.asOk().value, isA<Todo>());
@@ -31,6 +33,8 @@ void main() {
     if (todos.value.isEmpty) {
       const CreateTodoApiModel todoToCreate = CreateTodoApiModel(
         name: "Todo to be deleted",
+        description: "deleted todo",
+        done: false
       );
       await apiClient.createTodo(todoToCreate);
     }
@@ -41,12 +45,16 @@ void main() {
   test("update Todo returns a Result Ok", () async {
     const CreateTodoApiModel todoToCreate = CreateTodoApiModel(
       name: "Todo to be updated",
+      description: "updated todo",
+      done: true
     );
     final todoResult = await apiClient.createTodo(todoToCreate);
     final result = await apiClient.udpateTodo(
       UpdateTodoApiModel(
         id: todoResult.asOk().value.id,
         name: '${todoResult.asOk().value.name} + 2',
+        description: "updated todo",
+        done: true
       ),
     );
     expect(result.asOk().value, isA<Todo>());
@@ -55,6 +63,8 @@ void main() {
   test("get Todo by id returns a Result Ok", () async {
     const CreateTodoApiModel todoToCreate = CreateTodoApiModel(
       name: "New test todo",
+      description: "new todo",
+      done: false
     );
     final createdTodoResult = await apiClient.createTodo(todoToCreate);
 

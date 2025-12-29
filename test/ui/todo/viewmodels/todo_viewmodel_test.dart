@@ -17,13 +17,13 @@ void main() {
     });
 
     test("Should add todo", () async {
-      await viewModel.addTodo.execute("New Todo Item");
+      await viewModel.addTodo.execute(("New Todo Item", "", false));
       expect(viewModel.todos.length, 1);
       expect(viewModel.todos.last.name, "New Todo Item");
     });
 
     test("Should delete todo", () async {
-      await viewModel.addTodo.execute("New Todo Item");
+      await viewModel.addTodo.execute(("New Todo Item", "", false));
       final todoToDelete = viewModel.todos.first;
       await viewModel.deleteTodo.execute(todoToDelete);
       expect(viewModel.todos.length, 0);

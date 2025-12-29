@@ -5,9 +5,18 @@ import 'package:mvvm_example/domain/models/todo.dart';
 class TodoRepositoryDev implements TodoRepository {
   final List<Todo> _todos = [];
   @override
-  Future<Result<Todo>> add(String name) async {
+  Future<Result<Todo>> add({
+    required String name,
+    required String description,
+    required bool done,
+  }) async {
     final lastTodoIndex = _todos.isNotEmpty ? _todos.length : 0;
-    final newTodo = Todo(id: (lastTodoIndex + 1).toString(), name: name);
+    final newTodo = Todo(
+      id: (lastTodoIndex + 1).toString(),
+      name: name,
+      description: description,
+      done: done,
+    );
     return Result.ok(newTodo);
   }
 
@@ -29,5 +38,13 @@ class TodoRepositoryDev implements TodoRepository {
   @override
   Future<Result<Todo>> getTodoById(String id) async {
     return Result.ok(_todos.where((element) => element.id == id).first);
+  }
+
+  @override
+  Future<Result<Todo>> update(Todo todo) async {
+    await Future.delayed(const Duration(seconds: 2));
+    final todoIndex = _todos.indexWhere((t) => t.id == todo.id);
+    _todos[todoIndex] = todo;
+    return Result.ok(todo);
   }
 }

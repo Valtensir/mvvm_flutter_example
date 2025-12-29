@@ -13,6 +13,7 @@ class AddTodoDialog extends StatefulWidget {
 class _AddTodoDialogState extends State<AddTodoDialog> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
+  final _descriptionController = TextEditingController();
 
   @override
   void initState() {
@@ -44,9 +45,7 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             backgroundColor: Colors.red,
-            content: Text(
-              'Todo add error',
-            ),
+            content: Text('Todo add error'),
           ),
         );
       }
@@ -57,6 +56,7 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
   void dispose() {
     widget.viewmodel.addTodo.removeListener(_onResult);
     _nameController.dispose();
+    _descriptionController.dispose();
     super.dispose();
   }
 
@@ -66,33 +66,43 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
       content: IntrinsicHeight(
         child: Column(
           children: [
-            Form(
-              key: _formKey,
-              child: Column(
-                spacing: 16,
-                children: [
-                  const Text('Add Todo Dialog'),
-                  TextFormField(
-                    controller: _nameController,
-                    decoration: const InputDecoration(labelText: 'Todo Name'),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter a name';
-                      }
-                      return null;
-                    },
-                  ),
-                  ElevatedButton(
-                    onPressed: () async {
-                      if (_formKey.currentState!.validate()) {
-                        await widget.viewmodel.addTodo.execute(
-                          _nameController.text,
-                        );
-                      }
-                    },
-                    child: const Text('Add'),
-                  ),
-                ],
+            SingleChildScrollView(
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  spacing: 16,
+                  children: [
+                    const Text('Add Todo Dialog'),
+                    TextFormField(
+                      controller: _nameController,
+                      decoration: const InputDecoration(labelText: 'Todo Name'),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a name';
+                        }
+                        return null;
+                      },
+                    ),
+                     TextFormField(
+                      minLines: 3,
+                      maxLines: null,
+                      controller: _descriptionController,
+                      decoration: const InputDecoration(labelText: 'Description'),
+                    ),
+                    ElevatedButton(
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate()) {
+                          await widget.viewmodel.addTodo.execute((
+                            _nameController.text,
+                            _descriptionController.text,
+                            false,
+                          ));
+                        }
+                      },
+                      child: const Text('Add'),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
