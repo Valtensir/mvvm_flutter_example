@@ -20,7 +20,7 @@ class EditTodoWidget extends StatefulWidget {
 
 class _EditTodoWidgetState extends State<EditTodoWidget> {
   late final _nameController = TextEditingController(
-    text: widget.todo.description,
+    text: widget.todo.name,
   );
   late final _descriptionController = TextEditingController(
     text: widget.todo.description,

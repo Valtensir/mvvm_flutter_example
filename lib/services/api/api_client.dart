@@ -7,7 +7,7 @@ import 'package:mvvm_example/utils/result/result.dart';
 
 class ApiClient {
   ApiClient({String? host, int? port, HttpClient Function()? httpClientFactory})
-    : _host = host ?? "192.168.0.69",
+    : _host = host ?? "192.168.0.14",
       _port = port ?? 3000,
       _httpClientFactory = httpClientFactory ?? (() => HttpClient());
 

@@ -11,7 +11,7 @@ import '../ui/todo/viewmodels/todo_viewmodel.dart';
 
 GoRouter routerConfig() {
   final todoRepository = TodoRepositoryRemote(
-    apiClient: ApiClient(host: '192.168.1.7'),
+    apiClient: ApiClient(host: '192.168.1.14'),
   );
 
   final todoUpdateUseCase = TodoUpdateUseCase(todoRepository: todoRepository);

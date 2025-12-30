@@ -1,7 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:mvvm_example/utils/result/result.dart';
 import 'package:mvvm_example/domain/models/todo.dart';
 
-abstract class TodoRepository {
+abstract class TodoRepository extends ChangeNotifier {
+
+  List<Todo> get todos;
+
   Future<Result<List<Todo>>> get();
   Future<Result<Todo>> add({
     required String name,

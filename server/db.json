@@ -1,31 +1,24 @@
 {
   "todos": [
     {
-      "id": "568c",
-      "name": "sgnegnetj",
+      "id": "72c3",
+      "name": "teste",
       "description": "",
       "done": false,
       "runtimeType": "update"
     },
     {
-      "id": "72c3",
-      "name": "teste",
-      "description": "",
-      "done": false,
-      "runtimeType": "create"
-    },
-    {
       "id": "c218",
-      "name": "teste 2",
-      "description": "agnwgnagnafnagnagnacbfbfa hfhtgtwh th gr gr g",
-      "done": true,
+      "name": "descrição teste",
+      "description": "xgkdgdy",
+      "done": false,
       "runtimeType": "update"
     },
     {
       "id": "2545",
       "name": "uma descrição qualquer",
       "description": "uma descrição qualquer",
-      "done": false,
+      "done": true,
       "runtimeType": "update"
     }
   ]

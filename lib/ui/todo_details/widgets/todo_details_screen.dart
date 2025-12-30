@@ -15,6 +15,13 @@ class TodoDetailsScreen extends StatefulWidget {
 }
 
 class _TodoDetailsScreenState extends State<TodoDetailsScreen> {
+
+  @override
+  void dispose() {
+    widget.viewmodel.dispose();
+    widget.viewmodel.load.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

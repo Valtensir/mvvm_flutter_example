@@ -9,6 +9,7 @@ import '../../../domain/models/todo.dart';
 class TodoDetailsViewmodel extends ChangeNotifier {
   final TodoRepository _repository;
   final TodoUpdateUseCase _todoUpdateUseCase;
+  late final VoidCallback _repositoryListener;
 
   TodoDetailsViewmodel({
     required TodoRepository todoRepository,
@@ -17,6 +18,10 @@ class TodoDetailsViewmodel extends ChangeNotifier {
        _todoUpdateUseCase = todoUpdateUseCase {
     load = Command1(_load);
     updateTodo = Command1(_todoUpdateUseCase.updateTodo);
+    _repositoryListener = () {
+      load.execute(_todo.id);
+    };
+    _repository.addListener(_repositoryListener);
   }
 
   late final Command1<Todo, String> load;
@@ -41,5 +46,11 @@ class TodoDetailsViewmodel extends ChangeNotifier {
     } finally {
       notifyListeners();
     }
+  }
+
+  @override
+  void dispose() {
+    _repository.removeListener(_repositoryListener);
+    super.dispose();
   }
 }

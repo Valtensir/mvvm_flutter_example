@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:mvvm_example/domain/models/todo.dart';
 import 'package:mvvm_example/services/api/api_client.dart';
 import 'package:mvvm_example/services/api/models/todo/todo_api_model.dart';
@@ -6,10 +7,17 @@ import 'package:mvvm_example/utils/result/result.dart';
 
 import 'todo_repository.dart';
 
-class TodoRepositoryRemote implements TodoRepository {
+class TodoRepositoryRemote extends ChangeNotifier implements TodoRepository {
   final ApiClient _apiClient;
 
   TodoRepositoryRemote({required ApiClient apiClient}) : _apiClient = apiClient;
+
+  @override
+  List<Todo> get todos => _todos;
+
+  List<Todo> _todos = [];
+
+  final Map<String, Todo> _cachedTodos = {};
 
   @override
   Future<Result<Todo>> add({
@@ -24,12 +32,15 @@ class TodoRepositoryRemote implements TodoRepository {
 
       switch (result) {
         case Ok<Todo>():
+        _cachedTodos[result.value.id] = result.value;
           return Result.ok(result.value);
         default:
           return result;
       }
     } on Exception catch (e) {
       return Result.error(e);
+    } finally {
+      notifyListeners();
     }
   }
 
@@ -40,12 +51,15 @@ class TodoRepositoryRemote implements TodoRepository {
 
       switch (result) {
         case Ok<Todo>():
+        _cachedTodos.remove(todo.id);
           return Result.ok(result.value);
         default:
           return result;
       }
     } on Exception catch (e) {
       return Result.error(e);
+    } finally {
+      notifyListeners();
     }
   }
 
@@ -56,22 +70,29 @@ class TodoRepositoryRemote implements TodoRepository {
 
       switch (result) {
         case Ok<List<Todo>>():
+        _todos = result.value;
           return Result.ok(result.value);
         default:
           return result;
       }
     } on Exception catch (e) {
       return Result.error(e);
+    } finally {
+      notifyListeners();
     }
   }
 
   @override
   Future<Result<Todo>> getTodoById(String id) async {
+    if (_cachedTodos[id] != null) {
+      return Result.ok(_cachedTodos[id]!);
+    }
     try {
       final result = await _apiClient.getTodoById(id);
 
       switch (result) {
         case Ok<Todo>():
+        _cachedTodos[id] = result.value;
           return Result.ok(result.value);
         default:
           return result;
@@ -95,12 +116,17 @@ class TodoRepositoryRemote implements TodoRepository {
 
       switch (result) {
         case Ok<Todo>():
+        final todoIndex = _todos.indexWhere((e) => e.id == todo.id);
+        _todos[todoIndex] = result.value;
+        _cachedTodos[todo.id] = result.value;
           return Result.ok(result.value);
         default:
           return result;
       }
     } on Exception catch (e) {
       return Result.error(e);
+    } finally {
+      notifyListeners();
     }
   }
 }
