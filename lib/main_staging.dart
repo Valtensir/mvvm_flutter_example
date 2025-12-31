@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:logging/logging.dart';
 import 'package:mvvm_example/config/dependencies.dart';
 import 'package:mvvm_example/main.dart';
@@ -15,5 +15,5 @@ void main() {
       debugPrint('${event.stackTrace}');
     }
   });
-  runApp(MultiProvider(providers: localProviders, child: const MyApp()));
+  runApp(MultiProvider(providers: remoteProviders, child: const MyApp()));
 }

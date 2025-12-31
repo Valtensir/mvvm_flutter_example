@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:logging/logging.dart';
 import 'package:mvvm_example/domain/use_cases/todo_update_use_case.dart';
 import 'package:mvvm_example/utils/result/result.dart';
 import 'package:mvvm_example/data/repositories/todo/todo_repository.dart';
@@ -17,7 +18,7 @@ class TodoViewmodel extends ChangeNotifier {
     deleteTodo = Command1(_deleteTodo);
     updateTodo = Command1(_todoUpdateUseCase.updateTodo);
 
-    _repository.addListener((){
+    _repository.addListener(() {
       _todos = _repository.todos;
       notifyListeners();
     });
@@ -33,22 +34,32 @@ class TodoViewmodel extends ChangeNotifier {
   List<Todo> _todos = [];
   List<Todo> get todos => _todos;
 
+  final _log = Logger('TodoViewmodel');
+
   Future<Result<List<Todo>>> _load() async {
-    final result = await _repository.get();
-    switch (result) {
-      case Ok<List<Todo>>():
-        _todos = result.value;
-        notifyListeners();
-        break;
-      case Error():
-        //TODO: handle error
-        break;
+    try {
+      final result = await _repository.get();
+      switch (result) {
+        case Ok<List<Todo>>():
+          _todos = result.value;
+          _log.fine('TODOs carregados');
+          break;
+        case Error():
+          _log.warning('Erro ao carregar TODOs', result.error);
+          break;
+      }
+      return result;
+    } on Exception catch (e, stackTrace) {
+      _log.warning('Erro ao carregar TODOs', e, stackTrace);
+      return Result.error(e);
+    } finally {
+      notifyListeners();
     }
-    return result;
   }
 
   Future<Result<Todo>> _addTodo((String, String, bool) todo) async {
-    final (name, description, done) = todo;
+    try {
+      final (name, description, done) = todo;
     final result = await _repository.add(
       name: name,
       description: description,
@@ -57,26 +68,39 @@ class TodoViewmodel extends ChangeNotifier {
     switch (result) {
       case Ok<Todo>():
         _todos.add(result.value);
-        notifyListeners();
+        _log.fine('TODO adicionado com sucesso!');
         break;
       case Error():
-        //TODO: handle error
+        _log.warning('Erro ao adicionar TODO', result.error);
         break;
     }
     return result;
+    } on Exception catch (e,stackTrace) {
+      _log.warning('Erro ao adicionar TODO', e, stackTrace);
+      return Result.error(e);
+    } finally {
+      notifyListeners();
+    }
   }
 
   Future<Result<Todo>> _deleteTodo(Todo todo) async {
-    final result = await _repository.delete(todo);
+    try {
+      final result = await _repository.delete(todo);
     switch (result) {
       case Ok<Todo>():
         _todos.remove(todo);
-        notifyListeners();
+        _log.warning('TODO removido com sucesso!');
         break;
       case Error():
-        //TODO: handle error
+        _log.warning('Erro ao deletar TODO', result.error);
         break;
     }
     return result;
+    } on Exception catch (e, stackTrace) {
+      _log.warning('Erro ao deletar TODO', e, stackTrace);
+      return Result.error(e);
+    } finally {
+      notifyListeners();
+    }
   }
 }

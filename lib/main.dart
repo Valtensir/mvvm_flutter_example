@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mvvm_example/routing/router.dart';
+import 'main_staging.dart' as staging;
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => staging.main();
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
