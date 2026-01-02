@@ -38,7 +38,14 @@ const updateTodoMock = UpdateTodoApiModel(
   done: true,
 );
 
-const udpateTodoAlteradoMock = Todo(
+const updateTodoAlteradoMock = Todo(
+  id: "1",
+  name: "Nome alterado",
+  description: "Descrição alterada",
+  done: true,
+);
+
+const updateTodoMockUseCase = Todo(
   id: "1",
   name: "Nome alterado",
   description: "Descrição alterada",

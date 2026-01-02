@@ -109,7 +109,7 @@ void main() {
       ).thenAnswer((invocation) => Future.value(Result.ok(mockGetTodos)));
 
       when(() => apiClient.udpateTodo(updateTodoMock)).thenAnswer(
-        (invocation) => Future.value(Result.ok(udpateTodoAlteradoMock)),
+        (invocation) => Future.value(Result.ok(updateTodoAlteradoMock)),
       );
 
       final result = await todoRepository.get();
