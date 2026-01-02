@@ -1,25 +1,53 @@
 {
   "todos": [
     {
-      "id": "72c3",
-      "name": "teste",
-      "description": "",
-      "done": false,
-      "runtimeType": "update"
-    },
-    {
-      "id": "c218",
-      "name": "descrição teste",
-      "description": "xgkdgdy",
-      "done": false,
-      "runtimeType": "update"
-    },
-    {
       "id": "2545",
       "name": "uma descrição qualquer",
       "description": "uma descrição quaxhmxhmxhxhfhflquer",
       "done": true,
       "runtimeType": "update"
+    },
+    {
+      "id": "8c71",
+      "name": "New TODO",
+      "description": "Test description",
+      "done": false,
+      "runtimeType": "create"
+    },
+    {
+      "id": "e456",
+      "name": "TODO to be updated + 2",
+      "description": "updated TODO",
+      "done": true,
+      "runtimeType": "update"
+    },
+    {
+      "id": "cb82",
+      "name": "New test TODO",
+      "description": "new TODO",
+      "done": false,
+      "runtimeType": "create"
+    },
+    {
+      "id": "1c4e",
+      "name": "New TODO",
+      "description": "Test description",
+      "done": false,
+      "runtimeType": "create"
+    },
+    {
+      "id": "0302",
+      "name": "TODO to be updated + 2",
+      "description": "updated TODO",
+      "done": true,
+      "runtimeType": "update"
+    },
+    {
+      "id": "99cf",
+      "name": "New test TODO",
+      "description": "new TODO",
+      "done": false,
+      "runtimeType": "create"
     }
   ]
 }

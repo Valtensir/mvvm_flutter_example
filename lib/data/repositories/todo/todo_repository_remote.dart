@@ -32,7 +32,8 @@ class TodoRepositoryRemote extends ChangeNotifier implements TodoRepository {
 
       switch (result) {
         case Ok<Todo>():
-        _cachedTodos[result.value.id] = result.value;
+          _cachedTodos[result.value.id] = result.value;
+          _todos.add(result.value);
           return Result.ok(result.value);
         default:
           return result;
@@ -51,7 +52,8 @@ class TodoRepositoryRemote extends ChangeNotifier implements TodoRepository {
 
       switch (result) {
         case Ok<Todo>():
-        _cachedTodos.remove(todo.id);
+          _cachedTodos.remove(todo.id);
+          _todos.remove(todo);
           return Result.ok(result.value);
         default:
           return result;
@@ -70,7 +72,7 @@ class TodoRepositoryRemote extends ChangeNotifier implements TodoRepository {
 
       switch (result) {
         case Ok<List<Todo>>():
-        _todos = result.value;
+          _todos = result.value;
           return Result.ok(result.value);
         default:
           return result;
@@ -92,7 +94,7 @@ class TodoRepositoryRemote extends ChangeNotifier implements TodoRepository {
 
       switch (result) {
         case Ok<Todo>():
-        _cachedTodos[id] = result.value;
+          _cachedTodos[id] = result.value;
           return Result.ok(result.value);
         default:
           return result;
@@ -116,9 +118,9 @@ class TodoRepositoryRemote extends ChangeNotifier implements TodoRepository {
 
       switch (result) {
         case Ok<Todo>():
-        final todoIndex = _todos.indexWhere((e) => e.id == todo.id);
-        _todos[todoIndex] = result.value;
-        _cachedTodos[todo.id] = result.value;
+          final todoIndex = _todos.indexWhere((e) => e.id == todo.id);
+          _todos[todoIndex] = result.value;
+          _cachedTodos[todo.id] = result.value;
           return Result.ok(result.value);
         default:
           return result;
