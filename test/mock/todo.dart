@@ -51,3 +51,16 @@ const updateTodoMockUseCase = Todo(
   description: "Descrição alterada",
   done: true,
 );
+
+const mockTodoPost = CreateTodoApiModel(
+  name: "Mock API TODO",
+  description: "TODO for Mock API test",
+  done: false,
+);
+
+const Todo mockTodoPostResponse = Todo(
+  id: '1',
+  name: "Mock API TODO",
+  description: "TODO for Mock API test",
+  done: false,
+);

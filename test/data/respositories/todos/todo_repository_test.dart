@@ -108,7 +108,7 @@ void main() {
         () => apiClient.getTodos(),
       ).thenAnswer((invocation) => Future.value(Result.ok(mockGetTodos)));
 
-      when(() => apiClient.udpateTodo(updateTodoMock)).thenAnswer(
+      when(() => apiClient.updateTodo(updateTodoMock)).thenAnswer(
         (invocation) => Future.value(Result.ok(updateTodoAlteradoMock)),
       );
 

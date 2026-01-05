@@ -66,7 +66,7 @@ class ApiClient {
     }
   }
 
-  Future<Result<Todo>> udpateTodo(UpdateTodoApiModel todo) async {
+  Future<Result<Todo>> updateTodo(UpdateTodoApiModel todo) async {
     final client = _httpClientFactory();
     try {
       final request = await client.put(_host, _port, "/todos/${todo.id}");

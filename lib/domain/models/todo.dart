@@ -21,7 +21,7 @@ class Todo {
   }
 
   Map<String, dynamic> toJson() {
-    return {'id': id, 'namme': name, 'description': description, 'done': done};
+    return {'id': id, 'name': name, 'description': description, 'done': done};
   }
 
   Todo copyWith({String? id, String? name, String? description, bool? done}) {

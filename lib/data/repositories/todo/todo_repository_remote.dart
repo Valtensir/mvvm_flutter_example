@@ -107,7 +107,7 @@ class TodoRepositoryRemote extends ChangeNotifier implements TodoRepository {
   @override
   Future<Result<Todo>> update(Todo todo) async {
     try {
-      final result = await _apiClient.udpateTodo(
+      final result = await _apiClient.updateTodo(
         UpdateTodoApiModel(
           id: todo.id,
           name: todo.name,
